@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+{% block listcontent %}
+  <div class="alert alert-primary" role="alert">
+    <p class="lead my-2">Liste over ansatte</p>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">CPR Nummer</th>
+      <th scope="col">Email</th>
+      <th scope="col">Fornavn</th>
+      <th scope="col">Efternavn</th>
+      <th scope="col">Tlf.</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Postnummer</th>
+      <th scope="col">Bank Konto</th>
+      <th scope="col" style="text-align: center;">Opsig Medarbejders</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for employee in employees %}
+      <tr>
+        <th scope="row">{{ employee.cpr_number|slice:'6' }}-{{ employee.cpr_number|slice:'6:10' }}</th>
+        <td><a href="mailto:{{ employee.email }}">{{ employee.email }}</a></td>
+        <td>{{ employee.firstname }}</td>
+        <td>{{ employee.surname }}</td>
+        <td><a href="tel:+45{{ employee.phone_number }}">{{ employee.phone_number }}</a></td>
+        <td>{{ employee.address }}</td>
+        <td>{{ employee.zip_code }}</td>
+        <td>{{ employee.bank_account_details }}</td>
+        <td style="text-align: right;"><a href="{% url 'employee-dismiss' employee.cpr_number %}" class="btn btn-danger">Fyr medarbejder</a></td>
+
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

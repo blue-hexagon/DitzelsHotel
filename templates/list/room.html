@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% load divide %}
+{% block listcontent %}
+  <div class="alert alert-primary" role="alert">
+    <p class="lead my-2">Liste over rum der er udlejet p&aring; nuv&aelig;rende tidspunkt, og en liste over ledige rum.</p>
+  </div>
+  <table class="table ">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Type</th>
+      <th scope="col">Pris</th>
+      <th scope="col">Ledighed</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for room in rooms %}
+      <tr>
+        <th scope="row">{{ room.room_id }}</th>
+        <td>{{ room.room_type }}</td>
+        <td>{{ room.price_per_day_pennies|divide:'100' }} kr</td>
+      <td></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "semantic-ui/base.html" %}
+{% load static %}
+{% block content %}
+  <div class="mt-5"></div>
+  <h1 class="display-1 text-center">Ditzel's Hotel</h1>
+  <div class="mt-4"></div>
+  <p class="lead text-center">Stedet hvor gode minder opstår</p>
+  <hr>
+  <div class="mb-5"></div>
+  <div class="mb-3"></div>
+  <div class="text-center">
+    <img src="{% static 'hotel.png' %}" height="530" width="1200" style="object-fit: cover;" alt="Billede af Ditzels Hotel">
+  </div>
+  <div class="mt-3"></div>
+
+  {#  <script>#}
+  {#      var firstTabEl = document.querySelector('#myTab li:last-child a')#}
+  {#      var firstTab = new bootstrap.Tab(firstTabEl)#}
+  {#      firstTab.show()#}
+  {#  </script>#}
+{% endblock %}

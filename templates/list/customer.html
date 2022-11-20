@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+{% block listcontent %}
+  <div class="alert alert-primary" role="alert">
+    <p class="lead my-2">Liste over nuværende kunder der er tjekket ind</p>
+  </div>
+  {#  <form method="post" class="row gy-2 gx-3 align-items-center mb-4 mt-4">#}
+  {#    <div class="row mb-3">#}
+  {#      <div class="col-3">#}
+  {#        <input type="text" class="form-control" placeholder="Email">#}
+  {#      </div>#}
+  {#      <div class="col-3">#}
+  {#        <input type="text" class="form-control" placeholder="Fornavn">#}
+  {#      </div>#}
+  {#      <div class="col-3">#}
+  {#        <input type="text" class="form-control" placeholder="Efternavn">#}
+  {#      </div>#}
+  {#      <div class="col-3">#}
+  {#        <input type="text" class="form-control" placeholder="Tlf. Nummer">#}
+  {#      </div>#}
+  {##}
+  {#    </div>#}
+  {#    <div class="row mb-2">#}
+  {#      <div class="col-6">#}
+  {#        <input type="text" class="form-control" placeholder="Adresse">#}
+  {#      </div>#}
+  {#      <div class="col-auto">#}
+  {#        <input type="text" class="form-control" placeholder="Postnummer">#}
+  {#      </div>#}
+  {#      <div class="col-auto">#}
+  {#        <input type="text" class="form-control" placeholder="Land">#}
+  {#      </div>#}
+  {#      <div class="col-auto">#}
+  {#        <button type="submit" class="btn btn-success">+</button>#}
+  {#      </div>#}
+  {##}
+  {#    </div>#}
+  {#  </form>#}
+  <table class="table ">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Email</th>
+      <th scope="col">Fornavn</th>
+      <th scope="col">Efternavn</th>
+      <th scope="col">Tlf.</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Postnummer</th>
+      <th scope="col">Land</th>
+      <th scope="col" style="text-align: right;">Tjek ud tidligt</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for customer in customers %}
+      <tr>
+        <th scope="row">{{ customer.customer_id }}</th>
+        <td><a href="mailto:{{ customer.email }}">{{ customer.email }}</a></td>
+        <td>{{ customer.firstname }}</td>
+        <td>{{ customer.surname }}</td>
+        <td><a href="tel:+45{{ customer.phone_number }}">{{ customer.phone_number }}</a></td>
+        <td>{{ customer.address }}</td>
+        <td>{{ customer.zip_code }}</td>
+        <td>{{ customer.country }}</td>
+        <td style="text-align: right;">
+          <a href="{% url 'customer-checkout' customer.customer_id %}" class="btn btn-primary">Tjek ud</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

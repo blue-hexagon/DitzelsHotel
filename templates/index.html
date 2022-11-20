@@ -9,148 +9,24 @@
   <div class="mb-3"></div>
 
   <nav class="nav nav-pills flex-column flex-sm-row mb-2">
-{#    <a class="flex-sm-fill text-sm-center nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#customer" type="button">Kunder</a>#}
-    <a class="flex-sm-fill text-sm-center nav-link active" href="/list/customer/">Kunder</a>
-    <a class="flex-sm-fill text-sm-center nav-link active" href="/list/reservation/">Reservationer</a>
-    <a class="flex-sm-fill text-sm-center nav-link active" href="/list/room/">Værelser</a>
-    <a class="flex-sm-fill text-sm-center nav-link active" href="/list/employee/">Medarbejdere</a>
+    {#    <a class="flex-sm-fill text-sm-center nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#customer" type="button">Kunder</a>#}
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'customer-list' %} active {% endif %}" href="/list/customer/">Kunder</a>
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'reservation-list' %} active {% endif %}" href="/list/reservation/">Reservationer</a>
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'room-list' %} active {% endif %}" href="/list/room/">Værelser</a>
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'employee-list' %} active {% endif %}" href="/list/employee/">Medarbejdere</a>
   </nav>
   <div class="mt-3"></div>
   <hr>
   <div class="tab-content">
-    <div class="tab-pane active" id="customer">
-      <div class="alert alert-primary" role="alert">
-        <p class="lead">Liste over nuværende kunder der er tjekket ind</p>
-      </div>
-      <table class="table ">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Email</th>
-          <th scope="col">Fornavn</th>
-          <th scope="col">Efternavn</th>
-          <th scope="col">Tlf.</th>
-          <th scope="col">Adresse</th>
-          <th scope="col">Postnummer</th>
-          <th scope="col">Land</th>
-          <th scope="col" style="text-align: right;">Tjek ud tidligt</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for customer in customers %}
-          <tr>
-            <th scope="row">{{ customer.customer_id }}</th>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.firstname }}</td>
-            <td>{{ customer.surname }}</td>
-            <td><a href="tel:+45{{ customer.phone_number }}">{{ customer.phone_number }}</a></td>
-            <td>{{ customer.address }}</td>
-            <td>{{ customer.zip_code }}</td>
-            <td>{{ customer.country }}</td>
-            <td style="text-align: right;">
-              <a href="{% url 'customer-checkout' customer.customer_id %}" class="btn btn-primary">Tjek ud</a>
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="tab-pane" id="reservations">
-      <div class="alert alert-primary" role="alert">
-        <p class="lead">Liste over nuværende reservationer eller reservationer 1 uge ude i fremtiden.</p>
-      </div>
-      <table class="table ">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Kunde</th>
-          <th scope="col">Rum</th>
-          <th scope="col">Tjek ind dato</th>
-          <th scope="col">Tjek ud dato</th>
-          <th scope="col" style="text-align: right;">Annuller</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for reservation in reservations %}
-          <tr>
-            <th scope="row">{{ reservation.reservation_id }}</th>
-            <td>{{ reservation.customer }}</td>
-            <td>{{ reservation.room }}</td>
-            <td>{{ reservation.checkin_date }}</td>
-            <td>{{ reservation.checkout_date }}</td>
-            <td style="text-align: right;"><a href="{% url 'reservation-cancel' reservation.reservation_id %}" class="btn btn-warning">Annuller reservation</a></td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="tab-pane" id="rooms">
-      <div class="alert alert-primary" role="alert">
-        <p class="lead">Liste over rum der er udlejet p&aring; nuv&aelig;rende tidspunkt, og en liste over udlejede rum.</p>
-      </div>
-      <table class="table ">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Type</th>
-          <th scope="col">Pris</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for room in rooms %}
-          <tr>
-            <th scope="row">{{ room.room_id }}</th>
-            <td>{{ room.room_type }}</td>
-            <td>{{ room.price_per_day_pennies }}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="tab-pane" id="employees">
-      <div class="alert alert-primary" role="alert">
-        <p class="lead">Liste over ansatte</p>
-      </div>
-
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">CPR Nummer</th>
-          <th scope="col">Email</th>
-          <th scope="col">Fornavn</th>
-          <th scope="col">Efternavn</th>
-          <th scope="col">Tlf.</th>
-          <th scope="col">Adresse</th>
-          <th scope="col">Postnummer</th>
-          <th scope="col">Bank Konto</th>
-          <th scope="col" style="text-align: center;">Opsig Medarbejders</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for employee in employees %}
-          <tr>
-            <th scope="row">{{ employee.cpr_number }}</th>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.firstname }}</td>
-            <td>{{ employee.surname }}</td>
-            <td><a href="tel:+45{{ employee.phone_number }}">{{ employee.phone_number }}</a></td>
-            <td>{{ employee.address }}</td>
-            <td>{{ employee.zip_code }}</td>
-            <td>{{ employee.bank_account_details }}</td>
-            <td style="text-align: right;"><a href="{% url 'employee-dismiss' employee.cpr_number %}" class="btn btn-danger">Fyr medarbejder</a></td>
-
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    {% block listcontent %}
+    {% endblock %}
+    {% block frontpage %}
+    {% endblock %}
   </div>
 
-  <script>
-      var firstTabEl = document.querySelector('#myTab li:last-child a')
-      var firstTab = new bootstrap.Tab(firstTabEl)
-      firstTab.show()
-  </script>
+  {#  <script>#}
+  {#      var firstTabEl = document.querySelector('#myTab li:last-child a')#}
+  {#      var firstTab = new bootstrap.Tab(firstTabEl)#}
+  {#      firstTab.show()#}
+  {#  </script>#}
 {% endblock %}
