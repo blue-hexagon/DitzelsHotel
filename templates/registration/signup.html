@@ -1,0 +1,63 @@
+{% extends 'semantic-ui/base.html' %}
+{% block content %}
+    <div class="page-login" style="margin: 8rem 0;">
+        <div class="ui centered grid container">
+            <div class="nine wide column">
+                {% if form.non_field_errors %}
+                    <div class="ui icon warning message">
+                        <i class="lock icon"></i>
+                        <div class="content">
+                            <div class="header">
+                                Signup failed!
+                            </div>
+                            {% for error in form.non_field_errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="ui icon grey message">
+                        <i class="user plus icon"></i>
+                        <div class="content">
+                            <div class="header">
+                                Enter your new account details
+                            </div>
+                            <p>If you already have an account click the login button at the bottom</p>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="ui fluid card">
+                    <div class="content">
+                        <form class="ui form" method="post">
+                            {% csrf_token %}
+                            <div class="field">
+                                <label for="user">User</label>
+                                <input type="text" name="username" placeholder="Username" id="user">
+                            </div>
+                            <div class="field">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" placeholder="Password" id="password">
+                            </div>
+                            <div class="field">
+                                <label for="re_password">Password</label>
+                                <input type="password" name="re_password" placeholder="Password" id="re_password">
+                            </div>
+                            <div class="" style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                                <button  class="ui primary labeled icon button"
+                                   style="margin-top: 1rem;" type="submit">
+                                    <i class="user plus icon"></i>
+                                    Signup
+                                </button>
+                                <a href="{% url 'login' %}" class="ui green labeled icon button" style="margin-top: 1rem;" type="submit">
+                                    <i class="unlock alternate icon"></i>
+                                    Login
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
