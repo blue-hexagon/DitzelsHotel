@@ -1,0 +1,40 @@
+{% extends "semantic-ui/base.html" %}
+{% block content %}
+  <div class="mt-5"></div>
+  <h1 class="display-1 text-center">Insert Logs</h1>
+  <div class="mt-4"></div>
+  <p class="lead text-center"></p>
+  <div class="mb-5"></div>
+{#  <hr>#}
+  <div class="mb-3"></div>
+
+  <div class="mt-3"></div>
+{#  <hr>#}
+  <div class="tab-content">
+
+    {% block listcontent %}
+{#      <div class="alert alert-primary" role="alert">#}
+{#        <p class="lead my-2">Liste over ansatte</p>#}
+{#      </div>#}
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Timestamp</th>
+          <th scope="col">Table</th>
+          <th scope="col">Primary Key</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for insert_log in insert_logs %}
+          <tr>
+            <th scope="row">{{insert_log.time_stamp }}</th>
+            <td>{{ insert_log.type }}</td>
+            <td>{{ insert_log.pk_identifier }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endblock %}
+  </div>
+{% endblock %}

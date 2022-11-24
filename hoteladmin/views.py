@@ -59,14 +59,13 @@ def employee_list(request):
 def reservation_list(request):
     if True:  # Today and 4 weeks ahead of time
         today = datetime.date.today()
-        week_from_now = today + datetime.timedelta(weeks=4)
+        end_date = today + datetime.timedelta(weeks=4)
     elif False:  # In the midst of a reservation
         today = datetime.date.fromisoformat("2022-12-02")
-        week_from_now = today + datetime.timedelta(weeks=4)
+        end_date = today + datetime.timedelta(weeks=4)
     else:  # Show all reservations
         today = datetime.date.fromisoformat("2020-01-01")
-        week_from_now = today + datetime.timedelta(weeks=300)
-
+        end_date = today + datetime.timedelta(weeks=300)
     with connection.cursor() as c:
         c.execute(
             '''
@@ -79,9 +78,9 @@ def reservation_list(request):
             ON reservation.customer_id = customer.customer_id
             INNER JOIN room
             ON reservation.room_id = room.room_id
-            WHERE reservation.checkin_date >= %s AND reservation.checkin_date <= %s
+            WHERE reservation.checkin_date >= CURRENT_DATE AND reservation.checkin_date <= %s
             ORDER BY reservation.checkin_date;
-            ''', [today, week_from_now])
+            ''', [end_date])
         reservations = namedtuplefetchall(c)
     return render(
         request,
@@ -180,9 +179,9 @@ def customer_list(request):
         FROM customer
         INNER JOIN reservation
         ON reservation.customer_id = customer.customer_id
-        WHERE (reservation.checkin_date <= %s AND reservation.checkout_date >= %s) 
+        WHERE (reservation.checkin_date <= CURRENT_DATE AND reservation.checkout_date >= CURRENT_DATE) 
         ORDER BY reservation.checkin_date;
-        ''', [today, today])
+        ''', [])
         customers = namedtuplefetchall(c)
     return render(
         request,
@@ -191,7 +190,19 @@ def customer_list(request):
             "customers": customers,
         },
     )
-
+def list_insert_logs(request):
+    with connection.cursor() as c:
+        c.execute('''
+           SELECT * FROM insert_logger;
+        ''', [])
+        insert_logs = namedtuplefetchall(c)
+    return render(
+        request,
+        template_name="list/insert_logs.html",
+        context={
+            "insert_logs": insert_logs,
+        },
+    )
 
 def overview(request):
     return render(

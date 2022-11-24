@@ -93,7 +93,8 @@
         <td>{{ customer.checkin_date }}</td>
         <td>{{ customer.checkout_date }}</td>
         <td style="text-align: right;">
-          <a href="{% url 'customer-checkout' customer.customer_id %}" class="btn btn-primary">Tjek ud</a>
+          <button class="btn btn-primary" disabled>Tjek ud</button>
+{#          href="{% url 'customer-checkout' customer.customer_id %}" #}
         </td>
       </tr>
     {% endfor %}

@@ -1,9 +1,7 @@
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
-from ditzelshotel_fe import settings
 from hoteladmin.views import *
 
 urlpatterns = [
@@ -17,6 +15,7 @@ urlpatterns += [
     path("list/reservation/", reservation_list, name="reservation-list"),
     path("list/room/", room_list, name="room-list"),
     path("list/order/", order_list, name="order-list"),
+    path("list/insert-logs/",list_insert_logs, name="insert-log-list"),
     path("detail/order/<int:order_id>", order_detail, name="order-detail"),
     path("customer/<int:customer_id>/checkout/", customer_checkout, name="customer-checkout"),
     path("reservation/<int:reservation_id>/cancel/", reservation_cancel, name="reservation-cancel"),
