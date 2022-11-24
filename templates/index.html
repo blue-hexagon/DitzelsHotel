@@ -10,10 +10,10 @@
 
   <nav class="nav nav-pills flex-column flex-sm-row mb-2">
     {#    <a class="flex-sm-fill text-sm-center nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#customer" type="button">Kunder</a>#}
-    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'customer-list' %} active {% endif %}" href="/list/customer/">Kunder</a>
-    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'reservation-list' %} active {% endif %}" href="/list/reservation/">Reservationer</a>
-    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'room-list' %} active {% endif %}" href="/list/room/">Værelser</a>
-    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'employee-list' %} active {% endif %}" href="/list/employee/">Medarbejdere</a>
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'customer-list' %} active {% endif %}" href="/list/customer/">Nuværende Gæster</a>
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'reservation-list' %} active {% endif %}" href="/list/reservation/">Kommende Reservationer</a>
+    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'room-list' %} active {% endif %}" href="/list/room/">Ledige Værelser</a>
+{#    <a class="flex-sm-fill text-sm-center nav-link {% if url_name == 'employee-list' %} active {% endif %}" href="/list/employee/">Medarbejdere</a>#}
   </nav>
   <div class="mt-3"></div>
   <hr>

@@ -84,6 +84,9 @@ WSGI_APPLICATION = 'ditzelshotel_fe.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+MARIADB_PORT = '3306'
+POSTGRES_PORT = '5432'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -91,10 +94,20 @@ DATABASES = {
         'USER': 'djangouser',
         'PASSWORD': 'Kode1234!',
         'HOST': '172.16.21.73',
-        'PORT': '3306',
+        'PORT': MARIADB_PORT,
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'testdb',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Kode1234!',
+#         'HOST': '172.16.21.72',
+#         'PORT': POSTGRES_PORT,
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

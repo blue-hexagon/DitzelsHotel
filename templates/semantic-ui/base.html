@@ -2,79 +2,81 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.2/css/all.css"
-          integrity="sha384-yJpxAFV0Ip/w63YkZfDWDTU6re/Oc3ZiVqMa97pi8uPt92y0wzeK3UFM2yQRhEom" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
-    <link rel="icon" type="image/x-icon" href="{% static '/favicon.ico' %}">
-    <link rel="manifest" href="{% static '/site.webmanifest' %}">
-    <title>Two Note</title>
-    <style>
-        input[type="search"]::-webkit-search-decoration,
-        input[type="search"]::-webkit-search-cancel-button,
-        input[type="search"]::-webkit-search-results-button,
-        input[type="search"]::-webkit-search-results-decoration {
-            -webkit-appearance: none;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-yJpxAFV0Ip/w63YkZfDWDTU6re/Oc3ZiVqMa97pi8uPt92y0wzeK3UFM2yQRhEom" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>Ditzel's Hotel</title>
+  <style>
+      input[type="search"]::-webkit-search-decoration,
+      input[type="search"]::-webkit-search-cancel-button,
+      input[type="search"]::-webkit-search-results-button,
+      input[type="search"]::-webkit-search-results-decoration {
+          -webkit-appearance: none;
+      }
 
-        button.remove-btn-style {
-            background: none;
-            color: inherit;
-            border: none;
-            padding: 0;
-            font: inherit;
-            cursor: pointer;
-            outline: inherit;
-        }
+      button.remove-btn-style {
+          background: none;
+          color: inherit;
+          border: none;
+          padding: 0;
+          font: inherit;
+          cursor: pointer;
+          outline: inherit;
+      }
 
-        * {
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;
-            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-        }
+      * {
+          -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+          -khtml-user-select: none; /* Konqueror HTML */
+          -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none;
+          /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+      }
 
-        .draggable-resume-box {
-        }
+      .draggable-resume-box {
+      }
 
-        .dragging-resume-box {
-            border: 2px dashed grey;
-            border-radius: .75rem;
-            padding: 1em;
-            margin: 0;
-        }
+      .dragging-resume-box {
+          border: 2px dashed grey;
+          border-radius: .75rem;
+          padding: 1em;
+          margin: 0;
+      }
 
 
-        .border-box {
-            box-sizing: border-box;
-        }
+      .border-box {
+          box-sizing: border-box;
+      }
 
-        .dragging-resume-box-is-droppable {
-            border: 2px solid lightgrey;
-            border-radius: .75rem;
-            background: #00bc8c;
-        }
+      .dragging-resume-box-is-droppable {
+          border: 2px solid lightgrey;
+          border-radius: .75rem;
+          background: #00bc8c;
+      }
 
-    </style>
+  </style>
 </head>
 <body class="ui container mx-auto" style="margin-bottom: 5rem;">
 {% with request.resolver_match.url_name as url_name %}
-{% include 'semantic-ui/navbar.html' %}
+  {% include 'semantic-ui/navbar.html' %}
 
-{% block content %}
-{% endblock %}
-{% include "semantic-ui/footer.html" %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  {% block content %}
+  {% endblock %}
+  {% include "semantic-ui/footer.html" %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 {% endwith %}
 </body>
 </html>

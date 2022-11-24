@@ -1,0 +1,49 @@
+{% extends "semantic-ui/base.html" %}
+{% block content %}
+  <div class="mt-5"></div>
+  <h1 class="display-1 text-center">Ordre Detajler</h1>
+  <div class="mt-4"></div>
+  <p class="lead text-center"></p>
+  <div class="mb-5"></div>
+  {#  <hr>#}
+  <div class="mb-3"></div>
+  <div class="mt-3"></div>
+  {#  <hr>#}
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Ordre ID</th>
+        <th scope="col">Dato</th>
+        <th scope="col">Fornavn</th>
+        <th scope="col">Efternavn</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Linje Nummer</th>
+        <th scope="col">Mængde</th>
+        <th scope="col">Vare</th>
+        <th scope="col">Pris pr. stk.</th>
+        <th scope="col">Linje total</th>
+        <th scope="col" style="text-align: right;">Slet Linje</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for line_item in bill %}
+        <tr>
+          <td>{{ line_item.bill_id }}</td>
+          <td>{{ line_item.bill_date }}</td>
+          <td>{{ line_item.firstname }}</td>
+          <td>{{ line_item.surname }}</td>
+          <td>{{ line_item.address }}</td>
+          <td>{{ line_item.line_number }}</td>
+          <td>{{ line_item.amount }}</td>
+          <td>{{ line_item.name }}</td>
+          <td>{{ line_item.sales_price_pennies }} kr</td>
+          <td>{{ line_item.line_total }} kr</td>
+          <td style="text-align: right;"><button class="btn btn-danger" disabled>Slet</button></td>
+{#         href="{% url 'lineitem-delete' line_item.bill_id line_item.line_number %}"#}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

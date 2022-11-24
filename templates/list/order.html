@@ -1,0 +1,44 @@
+{% extends "semantic-ui/base.html" %}
+{% block content %}
+  <div class="mt-5"></div>
+  <h1 class="display-1 text-center">Ordre Oversigt</h1>
+  <div class="mt-4"></div>
+  <p class="lead text-center"></p>
+  <div class="mb-5"></div>
+  {#  <hr>#}
+  <div class="mb-3"></div>
+  <div class="mt-3"></div>
+{#  <hr>#}
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Ordre ID</th>
+        <th scope="col">Dato</th>
+        <th scope="col">Fornavn</th>
+        <th scope="col">Efternavn</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Hotelophold</th>
+        <th scope="col">Merkøb.</th>
+        <th scope="col">Pris total</th>
+        <th scope="col" style="text-align: right;">Vis Merkøb</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for bill in bills %}
+        <tr>
+          <td>{{ bill.bill_id }}</td>
+          <td>{{ bill.bill_date }}</td>
+          <td>{{ bill.firstname }}</td>
+          <td>{{ bill.surname }}</td>
+          <td>{{ bill.address }}</td>
+          <td>{{ bill.reservation_price }} kr</td>
+          <td>{{ bill.lineitems_total }} kr</td>
+          <td>{{bill.total_price}} kr</td>
+        <td style="text-align: right;"><a class="btn btn-primary" href="/detail/order/{{ bill.bill_id }}">Vis Merkøb</a> </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -16,9 +16,12 @@ urlpatterns += [
     path("list/employee/", employee_list, name="employee-list"),
     path("list/reservation/", reservation_list, name="reservation-list"),
     path("list/room/", room_list, name="room-list"),
+    path("list/order/", order_list, name="order-list"),
+    path("detail/order/<int:order_id>", order_detail, name="order-detail"),
     path("customer/<int:customer_id>/checkout/", customer_checkout, name="customer-checkout"),
     path("reservation/<int:reservation_id>/cancel/", reservation_cancel, name="reservation-cancel"),
     path("employee/<int:employee_id>/dismiss/", employee_dismiss, name="employee-dismiss"),
+    path("lineitem/<int:bill_id>/<int:line_number>/delete/", lineitem_delete, name="lineitem-delete"),
 ]
 """ Authentication """
 urlpatterns += [

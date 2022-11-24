@@ -65,9 +65,8 @@ class Employee(models.Model):
     def __str__(self) -> str:
         return self.firstname + " " + self.surname
 
-
 class LineItem(models.Model):
-    bill_id = models.IntegerField(primary_key=True)
+    bill = models.OneToOneField(Bill, models.DO_NOTHING, primary_key=True)
     line_number = models.IntegerField()
     product = models.ForeignKey('Product', models.DO_NOTHING)
     amount = models.IntegerField()
@@ -76,7 +75,7 @@ class LineItem(models.Model):
     class Meta:
         managed = False
         db_table = 'line_item'
-        unique_together = (('bill_id', 'line_number'),)
+        unique_together = (('bill', 'line_number'),)
 
     def __str__(self) -> str:
         return f"{self.bill_id}-{self.line_number}"

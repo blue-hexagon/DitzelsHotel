@@ -1,27 +1,53 @@
 {% extends "index.html" %}
 {% load divide %}
 {% block listcontent %}
-  <div class="alert alert-primary" role="alert">
-    <p class="lead my-2">Liste over rum der er udlejet p&aring; nuv&aelig;rende tidspunkt, og en liste over ledige rum.</p>
-  </div>
   <table class="table ">
     <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Rum ID</th>
       <th scope="col">Type</th>
       <th scope="col">Pris</th>
       <th scope="col">Ledighed</th>
+      <th scope="col">Næste Tjekind/Tjekud</th>
+      <th scope="col" style="text-align: right;">Reserver/Book</th>
     </tr>
     </thead>
     <tbody>
-    {% for room in rooms %}
-      <tr>
-        <th scope="row">{{ room.room_id }}</th>
-        <td>{{ room.room_type }}</td>
-        <td>{{ room.price_per_day_pennies|divide:'100' }} kr</td>
-      <td></td>
-      </tr>
-    {% endfor %}
+    {% with name="Bronze" %}
+      {% for room in rooms %}
+        {% if room.days_available != -1 %}
+          <tr class="table-success">
+            <th scope="row">{{ room.room_id }}</th>
+            <td>{{ room.room_type }}</td>
+            <td>{{ room.price_per_day_pennies|divide:'100' }} kr</td>
+            {% if room.days_available != None %}
+              <td>Ledigt næste {{ room.days_available }} dage</td>
+            {% else %}
+              <td>Ledigt</td>
+            {% endif %}
+            {% if room.days_available != None %}
+              <td>Næste tjekind {{ room.available_till_date }}</td>
+            {% else %}
+              <td>Ingen reservationer eller udlejninger</td>
+            {% endif %}
+            <td style="text-align: right;">
+              <button class="btn btn-primary" style="width: 5.725rem;" disabled>Udlej</button>
+            </td>
+          </tr>
+        {% else %}
+          <tr class="table-warning">
+            <th scope="row">{{ room.room_id }}</th>
+            <td>{{ room.room_type }}</td>
+            <td>{{ room.price_per_day_pennies|divide:'100' }} kr</td>
+            <td>Optaget næste {{ room.days_until_available }} dage</td>
+            <td>Næste tjekud {{ room.available_at_date }}</td>
+            <td style="text-align: right;">
+              <button class="btn btn-warning" style="width: 5.725rem;" disabled>Reserver</button>
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    {% endwith %}
     </tbody>
   </table>
 {% endblock %}
